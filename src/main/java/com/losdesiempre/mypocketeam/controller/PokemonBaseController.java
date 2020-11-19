@@ -1,7 +1,7 @@
 package com.losdesiempre.mypocketeam.controller;
 
-import com.losdesiempre.mypocketeam.domain.Pokemon;
-import com.losdesiempre.mypocketeam.service.PokemonService;
+import com.losdesiempre.mypocketeam.domain.PokemonBase;
+import com.losdesiempre.mypocketeam.service.PokemonBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,9 +9,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pocketo")
-public class PokemonController {
+public class PokemonBaseController {
 
-    @Autowired
+    /*@Autowired
     PokemonService pokemonService;
 
     @GetMapping("/{nombre}")
@@ -22,6 +22,6 @@ public class PokemonController {
     @PostMapping("/")
     public Pokemon createPocketo(@RequestBody Pokemon pocketo){
         return pokemonService.save(pocketo);
-    }
+    }*/
 
 }

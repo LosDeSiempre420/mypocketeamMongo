@@ -1,23 +1,23 @@
 package com.losdesiempre.mypocketeam.service;
 
-import com.losdesiempre.mypocketeam.domain.Pokemon;
-import com.losdesiempre.mypocketeam.repository.PokemonRepository;
+import com.losdesiempre.mypocketeam.domain.PokemonBase;
+import com.losdesiempre.mypocketeam.repository.PokemonBaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PokemonServiceImplementation implements PokemonService {
+public class PokemonBaseServiceImplementation implements PokemonBaseService {
 
     @Autowired
-    private PokemonRepository pokemonRepository;
+    private PokemonBaseRepository pokemonBaseRepository;
 
-    public List<Pokemon> listAll(){
-        return pokemonRepository.findAll();
+    public List<PokemonBase> listAll(){
+        return pokemonBaseRepository.findAll();
     }
 
-    public Pokemon save(Pokemon pokemon) {
+    /*public Pokemon save(Pokemon pokemon) {
         return pokemonRepository.save(pokemon);
     }
 
@@ -32,5 +32,5 @@ public class PokemonServiceImplementation implements PokemonService {
     @Override
     public Pokemon findbyNombre(String nombre) {
         return pokemonRepository.findByNombre(nombre);
-    }
+    }*/
 }
