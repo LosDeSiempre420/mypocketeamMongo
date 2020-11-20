@@ -114,7 +114,7 @@ public class AbstractMovementTest {
     }
 
     @Test
-    void GivenMovementIdAndMovementExistsThenReturnTheMovement() {
+    void GivenMovementIdAndMovementExistsThenReturnTheMovement() throws Exception{
         //Arrange
         Movement movex = movements.get(0);
         when(this.movementRepository.findById(1)).thenReturn(movex);
@@ -138,7 +138,7 @@ public class AbstractMovementTest {
     }
 
     @Test
-    void GivenMovementIdAndMovementNotExistsThenReturnException() {
+    void GivenMovementIdAndMovementNotExistsThenReturnException() throws Exception{
         //Arrange
         Movement movex = null;
         when(this.movementRepository.findById(4)).thenReturn(movex);

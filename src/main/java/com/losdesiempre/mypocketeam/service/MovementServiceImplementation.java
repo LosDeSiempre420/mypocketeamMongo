@@ -1,6 +1,7 @@
 package com.losdesiempre.mypocketeam.service;
 
 import com.losdesiempre.mypocketeam.domain.Movement;
+import com.losdesiempre.mypocketeam.exception.MovementNotFoundException;
 import com.losdesiempre.mypocketeam.repository.MovementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,11 @@ public class MovementServiceImplementation implements MovementService{
     }
 
     @Override
-    public Movement findById(int id) {
-        return movementRepository.findById(id);
+    public Movement findById(int id) throws MovementNotFoundException {
+        Movement aux =  movementRepository.findById(id);
+        if(aux!=null){
+            return aux;
+        }
+        throw new MovementNotFoundException("");
     }
 }
