@@ -18,7 +18,7 @@ public class MovementServiceImplementation implements MovementService{
     }
 
     @Override
-    public Movement findById(int i) {
-        return null;
+    public Movement findById(int id) {
+        return movementRepository.findById(id);
     }
 }

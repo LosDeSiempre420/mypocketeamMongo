@@ -114,7 +114,8 @@ public class AbstractMovementTest {
     @Test
     void GivenMovementIdAndMovementExistsThenReturnTheMovement() {
         //Arrange
-        when(this.movementRepository.findAll()).thenReturn(movements);
+        Movement movex = movements.get(0);
+        when(this.movementRepository.findById(1)).thenReturn(movex);
 
         //Act
         Movement check = movementServiceImplementation.findById(1);

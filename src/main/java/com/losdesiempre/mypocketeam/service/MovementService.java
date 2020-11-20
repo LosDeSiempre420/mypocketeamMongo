@@ -8,5 +8,5 @@ public interface MovementService {
 
     List<Movement> listAll();
 
-    Movement findById(int i);
+    Movement findById(int id);
 }
