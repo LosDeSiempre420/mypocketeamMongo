@@ -24,6 +24,6 @@ public class MovementServiceImplementation implements MovementService{
         if(aux!=null){
             return aux;
         }
-        throw new MovementNotFoundException("");
+        throw new MovementNotFoundException("Movement Not Found");
     }
 }
