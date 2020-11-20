@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MovementServiceImplementation {
+public class MovementServiceImplementation implements MovementService{
     @Autowired
     private MovementRepository movementRepository;
 
+    @Override
     public List<Movement> listAll() {
         return movementRepository.findAll();
     }
