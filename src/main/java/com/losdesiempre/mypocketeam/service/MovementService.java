@@ -7,4 +7,6 @@ import java.util.List;
 public interface MovementService {
 
     List<Movement> listAll();
+
+    Movement findById(int i);
 }

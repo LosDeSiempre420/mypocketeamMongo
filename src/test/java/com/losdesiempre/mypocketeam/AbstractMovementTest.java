@@ -110,4 +110,27 @@ public class AbstractMovementTest {
                 );
 
     }
+
+    @Test
+    void GivenMovementIdAndMovementExistsThenReturnTheMovement() {
+        //Arrange
+        when(this.movementRepository.findAll()).thenReturn(movements);
+
+        //Act
+        Movement check = movementServiceImplementation.findById(1);
+
+        //Assert
+        assertNotNull(check);
+        assertAll(
+                () -> assertEquals(1,check.getId()),
+                () -> assertEquals("Absorb",check.getName()),
+                () -> assertEquals("Grass",check.getType()),
+                () -> assertEquals("Special",check.getCategory()),
+                () -> assertEquals(20,check.getPower()),
+                () -> assertEquals(100,check.getAccuracy()),
+                () -> assertEquals(25,check.getPp()),
+                () -> assertEquals("User recovers half the HP inflicted on opponent.",check.getEffect())
+
+        );
+    }
 }

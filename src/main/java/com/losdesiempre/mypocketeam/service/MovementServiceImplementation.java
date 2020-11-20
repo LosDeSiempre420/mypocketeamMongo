@@ -16,4 +16,9 @@ public class MovementServiceImplementation implements MovementService{
     public List<Movement> listAll() {
         return movementRepository.findAll();
     }
+
+    @Override
+    public Movement findById(int i) {
+        return null;
+    }
 }
