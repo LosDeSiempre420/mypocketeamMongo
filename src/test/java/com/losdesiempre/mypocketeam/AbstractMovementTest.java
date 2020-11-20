@@ -1,6 +1,7 @@
 package com.losdesiempre.mypocketeam;
 
 import com.losdesiempre.mypocketeam.domain.Movement;
+import com.losdesiempre.mypocketeam.exception.MovementNotFoundException;
 import com.losdesiempre.mypocketeam.repository.MovementRepository;
 import com.losdesiempre.mypocketeam.service.MovementServiceImplementation;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class AbstractMovementTest {
 
+    private static final String MOVEMENT_NOT_FOUND_MSG = "Movement Not Found";
     @Autowired
     MovementServiceImplementation movementServiceImplementation;
 
@@ -133,5 +135,19 @@ public class AbstractMovementTest {
                 () -> assertEquals("User recovers half the HP inflicted on opponent.",check.getEffect())
 
         );
+    }
+
+    @Test
+    void GivenMovementIdAndMovementNotExistsThenReturnException() {
+        //Arrange
+        Movement movex = null;
+        when(this.movementRepository.findById(4)).thenReturn(movex);
+        Exception exception;
+
+        //Act + Assert
+        exception = assertThrows(MovementNotFoundException.class, () -> movementServiceImplementation.findById(4));
+        assertEquals(MOVEMENT_NOT_FOUND_MSG,exception.getMessage());
+
+
     }
 }
