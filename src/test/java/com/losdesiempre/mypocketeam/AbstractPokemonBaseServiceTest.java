@@ -2,6 +2,7 @@ package com.losdesiempre.mypocketeam;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
@@ -41,7 +42,7 @@ public class AbstractPokemonBaseServiceTest {
 
         PokemonBase pokemon = new PokemonBase();
 
-        //Primer PokemonBase de la BDD 
+        // Primer PokemonBase de la BDD
         pokemon.setId(1);
         pokemon.setName("Bulbasaur");
         types.add(new PokemonType(1, "Grass"));
@@ -55,7 +56,7 @@ public class AbstractPokemonBaseServiceTest {
         pokemon.setStats(new Stat(45, 49, 49, 65, 65, 45, 318));
         pokemonBaseList.add(pokemon);
 
-        //PokemonBase que esta al medio de la BDD
+        // PokemonBase que esta al medio de la BDD
         pokemon = new PokemonBase();
         pokemon.setId(20);
         pokemon.setName("Raticate");
@@ -72,7 +73,7 @@ public class AbstractPokemonBaseServiceTest {
         pokemon.setStats(new Stat(55, 81, 60, 50, 70, 97, 413));
         pokemonBaseList.add(pokemon);
 
-        //Ultimo PokemonBase de la BDD
+        // Ultimo PokemonBase de la BDD
         pokemon = new PokemonBase();
         pokemon.setId(40);
         pokemon.setName("Wigglytuff");
@@ -94,36 +95,58 @@ public class AbstractPokemonBaseServiceTest {
     /* ----- ListarPokemonBase ----- */
     @Test
     public void deberiaEntregarUnaListaConTodosLosPokemonBase() {
-        //Arrange
+        // Arrange
         when(pokemonBaseRepository.findAll()).thenReturn(pokemonBaseList);
 
-        //Act
+        // Act
         List<PokemonBase> all = pokemonBaseService.listAll();
 
-        //Assert
+        // Assert
         assertNotNull(all);
-        assertTrue(all.size() == pokemonBaseList.size());
-        assertAll(
-            () -> assertEquals(1, all.get(0).id),
-            () -> assertEquals("Bulbasaur", all.get(0).name),
-            () -> assertEquals("Grass", all.get(0).types.get(0).name),
-            () -> assertEquals(2, all.get(0).abilities.size()),
-            () -> assertEquals(0.7, all.get(0).height),
-            () -> assertEquals(49, all.get(0).stats.getAtk()),
+        assertEquals(all.size(), pokemonBaseList.size());
+        assertAll(() -> assertEquals(1, all.get(0).id), () -> assertEquals("Bulbasaur", all.get(0).name),
+                () -> assertEquals("Grass", all.get(0).types.get(0).name),
+                () -> assertEquals(2, all.get(0).abilities.size()), () -> assertEquals(0.7, all.get(0).height),
+                () -> assertEquals(49, all.get(0).stats.getAtk()),
 
-            () -> assertEquals(20, all.get(1).id),
-            () -> assertEquals("Raticate", all.get(1).name),
-            () -> assertEquals(1, all.get(1).types.size()),
-            () -> assertEquals("Guts", all.get(1).abilities.get(1).name),
-            () -> assertEquals(18.5, all.get(1).weight),
-            () -> assertEquals(97, all.get(1).stats.getSpd()),
+                () -> assertEquals(20, all.get(1).id), () -> assertEquals("Raticate", all.get(1).name),
+                () -> assertEquals(1, all.get(1).types.size()),
+                () -> assertEquals("Guts", all.get(1).abilities.get(1).name),
+                () -> assertEquals(18.5, all.get(1).weight), () -> assertEquals(97, all.get(1).stats.getSpd()),
 
-            () -> assertEquals(40, all.get(2).id),
-            () -> assertEquals("Wigglytuff", all.get(2).name),
-            () -> assertEquals("Fairy", all.get(2).types.get(1).name),
-            () -> assertEquals(true, all.get(2).abilities.get(2).isHidden),
-            () -> assertEquals(12.0, all.get(2).weight),
-            () -> assertEquals(435, all.get(2).stats.getTotal())
-        );
+                () -> assertEquals(40, all.get(2).id), () -> assertEquals("Wigglytuff", all.get(2).name),
+                () -> assertEquals("Fairy", all.get(2).types.get(1).name),
+                () -> assertEquals(true, all.get(2).abilities.get(2).isHidden),
+                () -> assertEquals(12.0, all.get(2).weight), () -> assertEquals(435, all.get(2).stats.getTotal()));
+    }
+
+    @Test
+    public void deberiaMostrarTodosDetallesPokemonBase() {
+        // arrenge
+        when(pokemonBaseRepository.findByPokemonId(20)).thenReturn(pokemonBaseList.get(1));
+        // act
+        PokemonBase pokemon = pokemonBaseService.findByPokemonId(20);
+        // assert
+        assertNotNull(pokemon);
+        assertAll(() -> assertEquals(20, pokemon.id), () -> assertEquals("Raticate", pokemon.name),
+                () -> assertEquals(1, pokemon.types.get(0).slot),
+                () -> assertEquals("Normal", pokemon.types.get(0).name),
+
+                () -> assertEquals(1, pokemon.abilities.get(0).getSlot()),
+                () -> assertEquals("Run Away", pokemon.abilities.get(0).getName()),
+                () -> assertFalse(pokemon.abilities.get(0).getIsHidden()),
+                () -> assertEquals(2, pokemon.abilities.get(1).getSlot()),
+                () -> assertEquals("Guts", pokemon.abilities.get(1).getName()),
+                () -> assertFalse(pokemon.abilities.get(1).getIsHidden()),
+                () -> assertEquals(3, pokemon.abilities.get(2).getSlot()),
+                () -> assertEquals("Hustle", pokemon.abilities.get(2).getName()),
+                () -> assertTrue(pokemon.abilities.get(2).getIsHidden()),
+
+                () -> assertEquals(0.7, pokemon.height), () -> assertEquals(18.5, pokemon.weight),
+
+                () -> assertEquals(55, pokemon.stats.getHp()), () -> assertEquals(81, pokemon.stats.getAtk()),
+                () -> assertEquals(60, pokemon.stats.getDef()), () -> assertEquals(50, pokemon.stats.getSpAtk()),
+                () -> assertEquals(70, pokemon.stats.getSpDef()), () -> assertEquals(97, pokemon.stats.getSpd()),
+                () -> assertEquals(413, pokemon.stats.getTotal()));
     }
 }

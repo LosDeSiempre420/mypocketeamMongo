@@ -32,4 +32,20 @@ public class Stat {
 		return total;
 	}
 
+	public Integer getHp() {
+		return hp;
+	}
+
+	public Integer getDef() {
+		return def;
+	}
+
+	public Integer getSpAtk() {
+		return sp_atk;
+	}
+
+	public Integer getSpDef() {
+		return sp_def;
+	}
+
 }

@@ -13,24 +13,23 @@ public class PokemonBaseServiceImplementation implements PokemonBaseService {
     @Autowired
     private PokemonBaseRepository pokemonBaseRepository;
 
-    public List<PokemonBase> listAll(){
+    public List<PokemonBase> listAll() {
         return pokemonBaseRepository.findAll();
     }
 
-    /*public Pokemon save(Pokemon pokemon) {
-        return pokemonRepository.save(pokemon);
+    public PokemonBase findByPokemonId(int id) {
+        return pokemonBaseRepository.findByPokemonId(id);
     }
 
-    public Pokemon findById(int id){
-        return pokemonRepository.getByElid(id);
-    }
-
-    public void delete(int id){
-        pokemonRepository.deleteById(id);
-    }
-
-    @Override
-    public Pokemon findbyNombre(String nombre) {
-        return pokemonRepository.findByNombre(nombre);
-    }*/
+    /*
+     * public Pokemon save(Pokemon pokemon) { return
+     * pokemonRepository.save(pokemon); }
+     * 
+     * public Pokemon findById(int id){ return pokemonRepository.getByElid(id); }
+     * 
+     * public void delete(int id){ pokemonRepository.deleteById(id); }
+     * 
+     * @Override public Pokemon findbyNombre(String nombre) { return
+     * pokemonRepository.findByNombre(nombre); }
+     */
 }
