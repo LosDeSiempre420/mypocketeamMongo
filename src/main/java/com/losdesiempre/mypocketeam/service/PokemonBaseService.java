@@ -7,6 +7,7 @@ import java.util.List;
 public interface PokemonBaseService {
 
     List<PokemonBase> listAll();
+    PokemonBase findById(int id);
 
     /*
      * Pokemon save(Pokemon pokemon); Pokemon findById(int id); void delete(int id);

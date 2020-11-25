@@ -17,8 +17,8 @@ public class PokemonBaseServiceImplementation implements PokemonBaseService {
         return pokemonBaseRepository.findAll();
     }
 
-    public PokemonBase findByPokemonId(int id) {
-        return pokemonBaseRepository.findByPokemonId(id);
+    public PokemonBase findById(int id) {
+        return pokemonBaseRepository.findById(id);
     }
 
     /*

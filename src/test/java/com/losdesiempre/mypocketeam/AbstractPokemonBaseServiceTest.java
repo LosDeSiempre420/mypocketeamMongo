@@ -36,7 +36,7 @@ public class AbstractPokemonBaseServiceTest {
 
     @BeforeEach
     void initPokemonBaseList() {
-        pokemonBaseList = new ArrayList<PokemonBase>();
+        pokemonBaseList = new ArrayList<>();
         List<PokemonType> types = new ArrayList<>();
         List<Ability> abilities = new ArrayList<>();
 
@@ -116,16 +116,16 @@ public class AbstractPokemonBaseServiceTest {
 
                 () -> assertEquals(40, all.get(2).id), () -> assertEquals("Wigglytuff", all.get(2).name),
                 () -> assertEquals("Fairy", all.get(2).types.get(1).name),
-                () -> assertEquals(true, all.get(2).abilities.get(2).isHidden),
+                () -> assertTrue(all.get(2).abilities.get(2).isHidden),
                 () -> assertEquals(12.0, all.get(2).weight), () -> assertEquals(435, all.get(2).stats.getTotal()));
     }
 
     @Test
     public void deberiaMostrarTodosDetallesPokemonBase() {
         // arrenge
-        when(pokemonBaseRepository.findByPokemonId(20)).thenReturn(pokemonBaseList.get(1));
+        when(pokemonBaseRepository.findById(20)).thenReturn(pokemonBaseList.get(1));
         // act
-        PokemonBase pokemon = pokemonBaseService.findByPokemonId(20);
+        PokemonBase pokemon = pokemonBaseService.findById(20);
         // assert
         assertNotNull(pokemon);
         assertAll(() -> assertEquals(20, pokemon.id), () -> assertEquals("Raticate", pokemon.name),

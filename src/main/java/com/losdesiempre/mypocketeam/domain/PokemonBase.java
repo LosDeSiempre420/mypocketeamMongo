@@ -1,7 +1,10 @@
 package com.losdesiempre.mypocketeam.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
+@Document( collection = "pokemon")
 public class PokemonBase {
 
 	public Integer id;
