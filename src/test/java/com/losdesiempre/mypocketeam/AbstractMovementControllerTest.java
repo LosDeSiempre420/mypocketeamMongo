@@ -71,4 +71,18 @@ public class AbstractMovementControllerTest {
 
     }
 
+    @Test
+    void getByNombreSeEjecutaYNombreNoExisteDebeRetornar404() throws Exception {
+        given(movementService.findByName("Absorb")).willReturn(null);
+
+        //when
+        MockHttpServletResponse response = mockMvc.perform(get("/api/pocketo/moves/Absorb")
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn()
+                .getResponse();
+
+        //Then
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
 }
