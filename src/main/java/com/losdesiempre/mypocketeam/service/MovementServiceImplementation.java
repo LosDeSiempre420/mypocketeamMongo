@@ -26,4 +26,9 @@ public class MovementServiceImplementation implements MovementService{
         }
         throw new MovementNotFoundException("Movement Not Found");
     }
+
+    @Override
+    public Movement findByName(String name) {
+        return null;
+    }
 }

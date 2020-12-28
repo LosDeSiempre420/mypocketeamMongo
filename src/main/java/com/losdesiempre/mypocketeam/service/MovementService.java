@@ -10,4 +10,6 @@ public interface MovementService {
     List<Movement> listAll();
 
     Movement findById(int id) throws MovementNotFoundException;
+
+    Movement findByName(String name);
 }
