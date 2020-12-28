@@ -21,6 +21,10 @@ public class PokemonBaseServiceImplementation implements PokemonBaseService {
         return pokemonBaseRepository.findById(id);
     }
 
+    public PokemonBase findByName(String name){
+        return pokemonBaseRepository.findByName(name);
+    }
+
     /*
      * public Pokemon save(Pokemon pokemon) { return
      * pokemonRepository.save(pokemon); }
