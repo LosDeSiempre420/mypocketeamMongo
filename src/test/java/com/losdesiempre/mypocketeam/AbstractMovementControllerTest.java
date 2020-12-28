@@ -1,5 +1,6 @@
 package com.losdesiempre.mypocketeam;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.losdesiempre.mypocketeam.controller.MovimientoController;
 import com.losdesiempre.mypocketeam.domain.Movement;
 import com.losdesiempre.mypocketeam.service.MovementService;
@@ -16,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,6 +39,7 @@ public class AbstractMovementControllerTest {
 
     @BeforeEach
     void setup(){
+        JacksonTester.initFields(this,new ObjectMapper());
         mockMvc = MockMvcBuilders.standaloneSetup(movimientoController).build();
     }
 

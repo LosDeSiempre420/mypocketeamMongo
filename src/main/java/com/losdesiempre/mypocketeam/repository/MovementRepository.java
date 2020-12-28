@@ -9,6 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface MovementRepository extends MongoRepository<Movement, Integer> {
 
     Movement findById(@Param("id") int id);
-    Movement findMovementByName(@Param("name") String name);
 
 }
