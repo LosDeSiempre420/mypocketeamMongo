@@ -82,7 +82,7 @@ public class AbstractMovementControllerTest {
                 .getResponse();
 
         //Then
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.getStatus()).isEqualTo(404);
     }
 
 }
