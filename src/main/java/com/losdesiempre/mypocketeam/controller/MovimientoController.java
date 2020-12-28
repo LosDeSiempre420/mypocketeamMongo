@@ -9,5 +9,4 @@ import java.util.List;
 @RequestMapping("/api/pocketo/moves")
 public class MovimientoController {
 
-
 }
