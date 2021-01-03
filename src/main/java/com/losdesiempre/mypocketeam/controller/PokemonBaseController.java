@@ -3,25 +3,27 @@ package com.losdesiempre.mypocketeam.controller;
 import com.losdesiempre.mypocketeam.domain.PokemonBase;
 import com.losdesiempre.mypocketeam.service.PokemonBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/pocketo")
+@RequestMapping("/api/pocketo/pokemonbase")
 public class PokemonBaseController {
 
-    /*@Autowired
-    PokemonService pokemonService;
+    @Autowired
+    private PokemonBaseService pokemonBaseService;
+    
+    @GetMapping(value = "/{name}")
+    public ResponseEntity<PokemonBase> getPokemonByName(@PathVariable("name") String name) {
+        name = name.toLowerCase();
+        name = name.substring(0,1).toUpperCase() + name.substring(1);
+        PokemonBase pokemon = pokemonBaseService.findByName(name);
 
-    @GetMapping("/{nombre}")
-    public Pokemon findByNombre(@PathVariable(value = "nombre") String nombre){
-        return pokemonService.findbyNombre(nombre);
+        if(pokemon != null) {
+            return new ResponseEntity<>(pokemon, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-
-    @PostMapping("/")
-    public Pokemon createPocketo(@RequestBody Pokemon pocketo){
-        return pokemonService.save(pocketo);
-    }*/
-
 }

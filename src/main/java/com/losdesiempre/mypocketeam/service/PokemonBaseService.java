@@ -8,6 +8,7 @@ public interface PokemonBaseService {
 
     List<PokemonBase> listAll();
     PokemonBase findById(int id);
+	PokemonBase findByName(String string);
 
     /*
      * Pokemon save(Pokemon pokemon); Pokemon findById(int id); void delete(int id);

@@ -11,6 +11,8 @@ public interface PokemonBaseRepository extends MongoRepository<PokemonBase, Inte
 
     PokemonBase findById(int id);
 
+	PokemonBase findByName(String name);
+
 
     /*
      * Pokemon findByNombre(@Param("nombre") String nombre); Pokemon
