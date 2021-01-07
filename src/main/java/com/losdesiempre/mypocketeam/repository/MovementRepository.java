@@ -10,4 +10,5 @@ public interface MovementRepository extends MongoRepository<Movement, Integer> {
 
     Movement findById(@Param("id") int id);
 
+    Movement findByName(@Param("name") String name);
 }

@@ -148,6 +148,42 @@ public class AbstractMovementTest {
         exception = assertThrows(MovementNotFoundException.class, () -> movementServiceImplementation.findById(4));
         assertEquals(MOVEMENT_NOT_FOUND_MSG,exception.getMessage());
 
+    }
+
+    @Test
+    void GivenMovementNameAndMovementExistsThenReturnTheMovement() throws MovementNotFoundException {
+        //Arrange
+        Movement move= movements.get(0);
+        when(this.movementRepository.findByName("Absorb")).thenReturn(move);
+
+        //Act
+        Movement check = movementServiceImplementation.findByName("Absorb");
+
+        //Assert
+        assertNotNull(check);
+        assertAll(
+                () -> assertEquals(1,check.getId()),
+                () -> assertEquals("Absorb",check.getName()),
+                () -> assertEquals("Grass",check.getType()),
+                () -> assertEquals("Special",check.getCategory()),
+                () -> assertEquals(20,check.getPower()),
+                () -> assertEquals(100,check.getAccuracy()),
+                () -> assertEquals(25,check.getPp()),
+                () -> assertEquals("User recovers half the HP inflicted on opponent.",check.getEffect())
+
+        );
+    }
+
+    @Test
+    void GivenMovementNameAndMovementNotExistsThenReturnTheMovement() throws Exception{
+        //Arrange
+        Movement move=null;
+        when(this.movementRepository.findByName("Absorb")).thenReturn(move);
+        Exception exception;
+
+        //Act + Assert
+        exception = assertThrows(MovementNotFoundException.class, () -> movementServiceImplementation.findByName("Absorb"));
+        assertEquals(MOVEMENT_NOT_FOUND_MSG,exception.getMessage());
 
     }
 }

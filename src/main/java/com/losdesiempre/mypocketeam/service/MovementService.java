@@ -11,5 +11,5 @@ public interface MovementService {
 
     Movement findById(int id) throws MovementNotFoundException;
 
-    Movement findByName(String name);
+    Movement findByName(String name) throws MovementNotFoundException;
 }
