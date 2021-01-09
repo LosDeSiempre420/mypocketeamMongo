@@ -43,4 +43,8 @@ public class PokemonBase {
 		this.stats = stats;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 }
