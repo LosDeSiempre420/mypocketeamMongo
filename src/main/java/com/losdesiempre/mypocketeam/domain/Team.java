@@ -21,4 +21,8 @@ public class Team {
     public void setName(String nombre) {
         this.name=nombre;
     }
+
+    public String getName() {
+        return name;
+    }
 }
