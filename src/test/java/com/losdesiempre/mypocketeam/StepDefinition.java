@@ -1,25 +1,52 @@
 package com.losdesiempre.mypocketeam;
+import com.losdesiempre.mypocketeam.domain.PokemonBase;
+import com.losdesiempre.mypocketeam.repository.MovementRepository;
+import com.losdesiempre.mypocketeam.repository.TeamRepository;
+import com.losdesiempre.mypocketeam.service.TeamServiceImplementation;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import com.losdesiempre.mypocketeam.domain.Team;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
+@SpringBootTest
 public class StepDefinition {
 
-    @Given("un nombre {string}")
-    public void un_nombre(String nombre) {
-        Team = new Team(nombre, <>);
+    //@Autowired
+    TeamServiceImplementation teamServiceImplementation;
+
+    //@MockBean
+    TeamRepository teamRepository;
+
+
+    List<PokemonBase> pokemon= new ArrayList<>();
+    Team team=new Team(1,"Equipo 1",pokemon);
+    Team check=new Team(0,"",pokemon);
+
+
+    @Given("un equipo con nombre {string}")
+    public void un_equipo_con_nombre(String name) {
+        List<PokemonBase> pokemon= new ArrayList<>();
+        team.setName(name);
     }
 
-    @When("solicito crear un equipo con el nombre {string}")
-    public void solicito_crear_un_equipo_con_el_nombre(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @When("busco un equipo por el nombre de {string}")
+    public void busco_un_equipo_por_el_nombre_de(String name) {
+        when(this.teamRepository.findByName(name)).thenReturn(team);
+        check = teamServiceImplementation.findByName(name);
     }
 
-    @Then("se agrega un equipo vacio con el nombre de {string}")
-    public void se_agrega_un_equipo_vacio_con_el_nombre_de(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("me retorna el equipo con el nombre {string}")
+    public void me_retorna_el_equipo_con_el_nombre(String name) {
+        assertNotNull(check);
     }
 
 

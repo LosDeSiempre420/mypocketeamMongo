@@ -21,7 +21,13 @@
   Feature: Controlador
 
     @tag1
-    Scenario: Buscar un equipo exitosamente
+    Scenario: Crear un equipo exitosamente
       Given un nombre "Equipo 1"
       When solicito crear un equipo con el nombre "Equipo 1"
       Then se agrega un equipo vacio con el nombre de "Equipo 1"
+
+      @tag2
+      Scenario: Buscar un equipo
+        Given un equipo con nombre "Equipo 1"
+        When busco un equipo por el nombre de "Equipo 1"
+        Then me retorna el equipo con el nombre "Equipo 1"
